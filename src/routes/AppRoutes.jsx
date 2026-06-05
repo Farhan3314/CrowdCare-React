@@ -25,23 +25,17 @@ const AppRoutes = () => {
   const token = localStorage.getItem("token");
   return (
     <Routes>
+      <Route path="/" element={<DashboardLayout />}>
+        <Route
+          path="/"
+          element={
+            token
+              ? <Navigate to="/dashboard/home" replace />
+              : <Navigate to="/login" replace />
+          }
+        />
 
-      <Route
-        path="/"
-        element={
-          token
-            ? <Navigate to="/dashboard/home" replace />
-            : <Navigate to="/login" replace />
-        }
-      />
-      <Route path="/login" element={<Login />} />
-      <Route path="/signUp" element={<Signup />} />
-      <Route path="/forgotPassword" element={<ForgotPassword />} />
-      <Route path="/verifyOtp" element={<OTPVerification />} />
-      <Route path="/resetPassword" element={<ResetPassword />} />
-
-      <Route path="/dashboard" element={<DashboardLayout />}>
-        <Route path="home" element={<HomePage />} />
+        <Route path="/dashboard/home" element={<HomePage />} />
 
         <Route path="/Campaign/CreateCampaign" element={<CreateCampaign />} />
         <Route path="/Donation/DonationHistory" element={<DonationHistory />} />
@@ -52,15 +46,19 @@ const AppRoutes = () => {
         <Route path="/dashboard/setting/FAQ" element={<FAQ />} />
         <Route path="/dashboard/setting/PrivacyPolicy" element={<PrivacyPolicy />} />
         <Route path="/dashboard/setting/Terms_&_Condition" element={<TermsCondition />} />
-
         <Route path="/users/getAuthUserDetails" element={<Profile />} />
         <Route path="/users/updateAuthUserDetails" element={<EditProfile />} />
-
         <Route path="/changePassword" element={<ChangePassword />} />
         <Route path="/logout" element={<Logout />} />
         <Route path="/deleteAccount" element={<DeleteAccount />} />
       </Route>
 
+      <Route path="/" element={<Navigate to="/login" replace />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/signUp" element={<Signup />} />
+      <Route path="/forgotPassword" element={<ForgotPassword />} />
+      <Route path="/verifyOtp" element={<OTPVerification />} />
+      <Route path="/resetPassword" element={<ResetPassword />} />
     </Routes>
   );
 };

@@ -39,6 +39,33 @@ export const authApi = baseApi.injectEndpoints({
             },
         }),
 
+        socialSignup: builder.mutation({
+            query: (data) => ({
+                url: "/socialSignup",
+                method: "POST",
+                body: data,
+            }),
+            async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+                try {
+                    const { data } = await queryFulfilled;
+                    console.log("SOCIAL TOKEN SAVED:", data?.data?.access_token);
+
+                    // Social login pe bhi purani image clear karo
+                    localStorage.removeItem("profileImageBase64");
+                    localStorage.removeItem("profileImage");
+
+                    dispatch(
+                        setCredentials({
+                            token: data?.data?.access_token,
+                            user: data?.data,
+                        })
+                    );
+                } catch (err) {
+                    console.log("SOCIAL SIGNUP ERROR:", err);
+                }
+            },
+        }),
+
         forgotPassword: builder.mutation({
             query: (data) => ({
                 url: "/forgotPassword",
@@ -160,6 +187,7 @@ export const authApi = baseApi.injectEndpoints({
 export const {
     useSignupMutation,
     useLoginMutation,
+    useSocialSignupMutation,
     useForgotPasswordMutation,
     useOtpVerificationMutation,
     useResendOtpMutation,

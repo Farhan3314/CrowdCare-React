@@ -66,14 +66,11 @@ const DashboardLayout = () => {
         return () => window.removeEventListener("profileImageUpdated", handleUpdate);
     }, []);
 
-    // ✅ Naya
     useEffect(() => {
+        if (localStorage.getItem("profileImageBase64")) return;
         if (!user?.profileImage) return;
         const authToken = token || localStorage.getItem("token");
         if (!authToken) return;
-
-        const cachedUrl = localStorage.getItem("profileImageUrl");
-        if (cachedUrl === user.profileImage && localStorage.getItem("profileImageBase64")) return;
 
         fetch(user.profileImage, {
             headers: { Authorization: `Bearer ${authToken}` },
@@ -86,7 +83,6 @@ const DashboardLayout = () => {
                 const reader = new FileReader();
                 reader.onloadend = () => {
                     localStorage.setItem("profileImageBase64", reader.result);
-                    localStorage.setItem("profileImageUrl", user.profileImage);
                     setNavImageUrl(reader.result);
                 };
                 reader.readAsDataURL(blob);

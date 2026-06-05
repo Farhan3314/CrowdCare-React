@@ -1,0 +1,158 @@
+@import "tailwindcss";
+
+html,
+body {
+  height: 100%;
+  overflow: auto;
+}
+
+.review-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.review-label {
+  width: 200px;
+  min-width: 200px;
+  color: #858585;
+  font-size: 14px;
+}
+
+.review-value {
+  flex: 1;
+  font-weight: 500;
+  font-size: 14px;
+  color: #1f1f1f;
+  word-break: break-word;
+}
+
+.campaign-stepper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  position: relative;
+}
+
+.campaign-stepper::before {
+  content: "";
+  position: absolute;
+  left: 16px;
+  top: 32px;
+  height: calc(100% - 32px);
+  width: 1.5px;
+  background-color: #BDBDBD;
+  z-index: 0;
+}
+
+.mobile-stepper-line {
+  display: none;
+}
+
+@media (max-width: 768px) {
+
+  .campaign-wrapper {
+    flex-direction: column !important;
+    padding: 15px !important;
+  }
+
+  .campaign-stepper {
+    width: 100%;
+    flex-direction: row !important;
+    justify-content: space-between !important;
+    align-items: flex-start !important;
+    margin-bottom: 24px;
+    position: relative;
+  }
+
+  .campaign-stepper::before {
+    display: none;
+  }
+
+  .mobile-stepper-line {
+    display: block !important;
+    position: absolute;
+    top: 16px;
+    left: 48px;
+    right: 48px;
+    height: 1.5px;
+    background-color: #BDBDBD;
+    z-index: 0;
+  }
+
+  .campaign-stepper .step-item {
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    gap: 6px !important;
+    margin-top: 0 !important;
+    flex: 1;
+  }
+
+  .campaign-stepper h3 {
+    display: block !important;
+    font-size: 10px !important;
+    text-align: center !important;
+    max-width: 70px;
+    line-height: 1.3;
+    margin: 0 auto;
+  }
+
+  .create-campaign .h-60 {
+    height: 180px !important;
+  }
+
+  .create-campaign input,
+  .create-campaign select,
+  .create-campaign textarea {
+    width: 100% !important;
+  }
+
+  .create-campaign .grid.grid-cols-2 {
+    grid-template-columns: 1fr !important;
+  }
+
+  .create-campaign .grid.grid-cols-4 {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+
+  .create-campaign button.w-44 {
+    width: 48% !important;
+  }
+
+  .review-card {
+    padding: 15px;
+  }
+
+  .review-label {
+    width: 130px !important;
+    min-width: 130px !important;
+    font-size: 13px;
+  }
+
+  .review-value {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 480px) {
+
+  .create-campaign button.w-44 {
+    width: 48% !important;
+    height: 48px !important;
+  }
+
+  .review-card {
+    padding: 12px;
+  }
+
+  .review-label {
+    width: 110px !important;
+    min-width: 110px !important;
+    font-size: 12px;
+  }
+
+  .review-value {
+    font-size: 12px;
+  }
+}

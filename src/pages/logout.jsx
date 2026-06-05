@@ -14,13 +14,11 @@ const Logout = ({ isOpen, onClose, userName }) => {
         } catch (error) {
             console.error("Logout error:", error);
         } finally {
-            // ─── Sirf auth data clear karo ───────────────────────────────
-            // localStorage.clear()  ← yeh localCampaigns bhi delete karta tha
+
             localStorage.removeItem("token");
             localStorage.removeItem("user");
             localStorage.removeItem("authToken");
             localStorage.removeItem("campaignDraft");  // draft clear karo
-            // localCampaigns mat hatao → logout ke baad bhi data rahega
 
             sessionStorage.clear();  // session to clear ho sakta hai
 
